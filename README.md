@@ -6,6 +6,10 @@ The majority of the code is based on the [vscode-markdown-pdf](https://github.co
 
 ![PDF](img/pdf.png)
 
+**CAUTION**
+
+This package is a fork of [pretty-markdown-pdf](https://www.npmjs.com/package/pretty-markdown-pdf), I just fork it to update old dependencies and do a little fix, maybe later i will drop it to use the original, if the original getting better. 
+
 ## Features
 
 Supports the following features
