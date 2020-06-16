@@ -146,7 +146,8 @@ function convertMarkdownToHtml(filename, type, text, config) {
     md.use(require("markdown-it-emoji"), options)
     md.renderer.rules.emoji = function (token, idx) {
       let emoji = token[idx].markup
-      let emojipath = path.join(__dirname, "node_modules", "emoji-images", "pngs", emoji + ".png")
+      let module_path = require.resolve('emoji-images')
+      let emojipath = path.join(module_path, "pngs", emoji + ".png")
       let emojidata = readFile(emojipath, null).toString("base64")
       if (emojidata) {
         return "<img class='emoji' alt='" + emoji + "' src='data:image/png;base64," + emojidata + "' />"
@@ -589,7 +590,8 @@ function readStyles(uri, config) {
     if (ishighlight) {
       if (highlightStyle) {
         let css = config["highlightStyle"] || "github.css"
-        filename = path.join(__dirname, "node_modules", "highlight.js", "styles", css)
+        let module_path = require.resolve('highlight.js')
+        filename = path.join(module_path, "styles", css)
         style += makeCss(filename)
       } else {
         filename = path.join(__dirname, "styles", "tomorrow.css")
@@ -689,7 +691,7 @@ async function installChromium(config) {
 
     const puppeteer = require("puppeteer")
     const puppeteerDir = path.dirname(require.resolve('puppeteer'))
-    const puppeteerMetadata = require(puppeteerDir, "package.json")
+    const puppeteerMetadata = require(path.resolve(puppeteerDir, "package.json"))
 
     let revision = puppeteerMetadata.puppeteer.chromium_revision
     let browserFetcher = puppeteer.createBrowserFetcher()
