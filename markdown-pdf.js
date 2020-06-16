@@ -146,7 +146,7 @@ function convertMarkdownToHtml(filename, type, text, config) {
     md.use(require("markdown-it-emoji"), options)
     md.renderer.rules.emoji = function (token, idx) {
       let emoji = token[idx].markup
-      let module_path = require.resolve('emoji-images')
+      let module_path = path.dirname(require.resolve('emoji-images'))
       let emojipath = path.join(module_path, "pngs", emoji + ".png")
       let emojidata = readFile(emojipath, null).toString("base64")
       if (emojidata) {
@@ -590,7 +590,7 @@ function readStyles(uri, config) {
     if (ishighlight) {
       if (highlightStyle) {
         let css = config["highlightStyle"] || "github.css"
-        let module_path = require.resolve('highlight.js')
+        let module_path = path.dirname(require.resolve('highlight.js'))
         filename = path.join(module_path, "styles", css)
         style += makeCss(filename)
       } else {
