@@ -688,7 +688,8 @@ async function installChromium(config) {
     setProxy(config)
 
     const puppeteer = require("puppeteer")
-    const puppeteerMetadata = require(path.join(__dirname, "node_modules", "puppeteer", "package.json"))
+    const puppeteerDir = path.dirname(require.resolve('puppeteer'))
+    const puppeteerMetadata = require(puppeteerDir, "package.json")
 
     let revision = puppeteerMetadata.puppeteer.chromium_revision
     let browserFetcher = puppeteer.createBrowserFetcher()

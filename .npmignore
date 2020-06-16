@@ -1,0 +1,6 @@
+.nvmrc
+sample/
+.vscode/
+img/
+.travis.yml
+generate-samples.sh
